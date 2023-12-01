@@ -18,6 +18,6 @@ struct Cat {
 
     void giveToy(std::string toy);
 
-}
+};
 
 #endif
