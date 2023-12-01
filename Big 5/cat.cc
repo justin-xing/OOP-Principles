@@ -4,7 +4,7 @@ using namespace std;
 
 Cat::Cat(string name, string colour) : name{name}, colour{colour}, toyArray{new string [5]}, length{0} {}
 
-Cat::Cat(Cat &other) : name{other.name}, colour{other.name}, toyArray{new string [5]}, length(other.length) {
+Cat::Cat(const Cat &other) : name{other.name}, colour{other.name}, toyArray{new string [5]}, length(other.length) {
     for (int i = 0; i < other.length; i++) {
         toyArray[i] = other.toyArray[i];
     }
@@ -14,8 +14,8 @@ Cat::Cat(Cat &&other) : name{other.name}, colour{other.colour}, toyArray{other.t
     other.toyArray = nullptr;
 }
 
-Cat & operator=(Cat &other) {
-    if (*this == other) {
+Cat & Cat::operator=(const Cat &other) {
+    if (this == &other) {
         return *this;
     } else {
         name = other.name;
@@ -30,7 +30,7 @@ Cat & operator=(Cat &other) {
     }
 }
 
-Cat & operator=(Cat &&other) {
+Cat & Cat::operator=(Cat &&other) {
     swap(name, other.name);
     swap(colour, other.colour);
     swap(length, other.length);
